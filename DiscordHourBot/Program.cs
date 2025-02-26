@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 class Program
 {
     private DiscordSocketClient _client;
-    private IConfiguration _config;
 
     static async Task Main(string[] args) => await new Program().RunBotAsync();
 
@@ -16,8 +15,7 @@ class Program
     {
         Console.WriteLine("Bot démarré...");
 
-        // Chargement de la configuration
-        _config = LoadConfiguration();
+        
 
         // Configuration du client Discord avec les intents nécessaires
         var config = new DiscordSocketConfig
@@ -52,7 +50,7 @@ class Program
 
         if (userMessage.Content == "!ping")
         {
-            await userMessage.Channel.SendMessageAsync("Pong !");
+            await userMessage.Channel.SendMessageAsync("current time: " +DateTime.UtcNow);
         }
     }
 
@@ -62,12 +60,5 @@ class Program
         return Task.CompletedTask;
     }
 
-    private IConfiguration LoadConfiguration()
-    {
-        var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-        return builder.Build();
-    }
+    
 }

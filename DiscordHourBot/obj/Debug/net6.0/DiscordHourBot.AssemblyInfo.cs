@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DiscordHourBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df100dc07a6397ea5a58ff4b097885eaa2ce5571")]
 [assembly: System.Reflection.AssemblyProductAttribute("DiscordHourBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DiscordHourBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

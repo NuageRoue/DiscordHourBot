@@ -17,7 +17,7 @@ class Program
 
         
 
-        // Configuration du client Discord avec les intents nécessaires
+        // configuration:
         var config = new DiscordSocketConfig
         {
             GatewayIntents = GatewayIntents.Guilds |
@@ -35,22 +35,24 @@ class Program
         await _client.LoginAsync(TokenType.Bot, token);
         await _client.StartAsync();
 
-        await Task.Delay(-1); // Garde le bot en vie
+        await Task.Delay(-1); // keep alive
     }
 
     private async Task CommandHandler(SocketMessage message)
     {
-        // Vérifie que c'est un message utilisateur et pas un embed ou autre
         if (message is not SocketUserMessage userMessage) return;
 
         Console.WriteLine($"Message reçu : \"{userMessage.Content}\" de {userMessage.Author.Username}");
 
-        // Ignore les messages des bots
         if (userMessage.Author.IsBot) return;
 
-        if (userMessage.Content == "!ping")
+        if (userMessage.Content == "!taiwan")
         {
-            await userMessage.Channel.SendMessageAsync("current time: " +DateTime.UtcNow);
+            await userMessage.Channel.SendMessageAsync("À Taïwan, il est: " + GetTaiwanTime());
+        }
+        if (userMessage.Content == "!france")
+        {
+            await userMessage.Channel.SendMessageAsync("En France, il est: " + GetFranceTime());
         }
     }
 
@@ -60,5 +62,24 @@ class Program
         return Task.CompletedTask;
     }
 
-    
+    string GetTaiwanTime()
+    {
+        TimeZoneInfo taiwanTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+
+        DateTime utcNow = DateTime.UtcNow;
+        DateTime taiwanTime = TimeZoneInfo.ConvertTimeFromUtc(utcNow, taiwanTimeZone);
+
+        return taiwanTime.ToString("HH:mm");
+    }
+
+    string GetFranceTime()
+    {
+        TimeZoneInfo franceTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Romance Standard Time");
+
+        DateTime utcNow = DateTime.UtcNow;
+        DateTime franceTime = TimeZoneInfo.ConvertTimeFromUtc(utcNow, franceTimeZone);
+
+        return franceTime.ToString("HH:mm");
+    }
+
 }
